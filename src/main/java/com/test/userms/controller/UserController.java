@@ -1,7 +1,6 @@
 package com.test.userms.controller;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.ctc.wstx.shaded.msv_core.util.Uri;
 import com.test.userms.bean.User;
 import com.test.userms.exception.UserNotFoundException;
 import com.test.userms.repository.UserRepository;
