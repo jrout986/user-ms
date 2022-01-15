@@ -1,0 +1,1 @@
+insert into USER (id,age,gender,name) values (1,25,'Male','Jack'), (2,35,'Male','Jill'), (3,20,'Female','Mary');
