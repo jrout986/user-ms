@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +46,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/users")
-	public ResponseEntity<Object> saveUser(@RequestBody User user){
+	public ResponseEntity<Object> saveUser(@RequestBody @Valid User user){
 		User newUser=null;
 		if(user.getId()==null) {
 			newUser=userRepository.save(user);
