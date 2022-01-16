@@ -33,7 +33,15 @@ public class UserController {
 	
 	@GetMapping("/users")
 	public List<User> getAllUsers(){
-		return userRepository.findAll();
+		List<User> users=userRepository.findAll();
+		/*
+		 * MappingJacksonValue mapping=new MappingJacksonValue(users);
+		 * SimpleBeanPropertyFilter
+		 * filter=SimpleBeanPropertyFilter.filterOutAllExcept("name","age","gender");
+		 * FilterProvider filters=new SimpleFilterProvider().addFilter("display-user",
+		 * filter); mapping.setFilters(filters);
+		 */
+		return users;
 	}
 	
 	@GetMapping("/users/{userId}")

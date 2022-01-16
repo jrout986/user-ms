@@ -1,1 +1,2 @@
 insert into USER (id,age,gender,name) values (1,25,'Male','Jack'), (2,35,'Male','Jill'), (3,20,'Female','Mary');
+insert into POST (id,message,user_id) values (1,'First',1),(2,'Second',1),(3,'Third',1),(4,'Random 1',2),(5,'Random 2',2);

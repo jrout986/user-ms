@@ -11,3 +11,11 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     defer-datasource-initialization: true
+  jackson:
+    time-zone: IST
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - "*"

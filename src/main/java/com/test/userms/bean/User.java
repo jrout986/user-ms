@@ -1,13 +1,18 @@
 package com.test.userms.bean;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Pattern.Flag;
+
+
 import javax.validation.constraints.Size;
 
 @Entity
@@ -27,6 +32,9 @@ public class User {
 	@NotNull
 	@Pattern(regexp = "(male|female)", flags = Flag.UNICODE_CASE)
 	private String gender;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Post> posts;
 	
 	public Integer getId() {
 		return id;
@@ -51,6 +59,12 @@ public class User {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	public List<Post> getPosts() {
+		return posts;
+	}
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 	
 	
