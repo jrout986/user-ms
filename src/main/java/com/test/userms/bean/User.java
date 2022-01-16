@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Pattern.Flag;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -13,12 +16,16 @@ public class User {
 	@Id
 	private Integer id;
 	
+	@NotNull
 	@Size(min = 2)
 	private String name;
 	
+	@NotNull
 	@Min(value = 18)
 	private Integer age;
 	
+	@NotNull
+	@Pattern(regexp = "(male|female)", flags = Flag.UNICODE_CASE)
 	private String gender;
 	
 	public Integer getId() {
