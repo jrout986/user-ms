@@ -1,12 +1,16 @@
 package com.test.userms.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,10 +37,15 @@ public class UserController {
 	}
 	
 	@GetMapping("/users/{userId}")
-	public ResponseEntity<User> getUserByUserId(@PathVariable Integer userId){
+	public EntityModel<User> getUserByUserId(@PathVariable Integer userId){
 		Optional<User> ifUser=userRepository.findById(userId);
 		if(ifUser.isPresent()) {
-			return new ResponseEntity<User>(ifUser.get(), HttpStatus.FOUND);
+			//return new ResponseEntity<User>(ifUser.get(), HttpStatus.FOUND);
+			List<Link> links=new ArrayList<>();
+			Link link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers()).withRel("all-users");
+			links.add(link);
+			EntityModel<User> model=EntityModel.of(ifUser.get(), links);
+			return model;
 		}else {
 			throw new UserNotFoundException("userId-"+userId+" could not be found");
 			//return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
