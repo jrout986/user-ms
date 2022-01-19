@@ -30,6 +30,7 @@ import com.test.userms.bean.DemoBean;
 import com.test.userms.bean.User;
 import com.test.userms.exception.UserNotFoundException;
 import com.test.userms.repository.UserRepository;
+import com.test.userms.util.MyProperties;
 
 @RestController
 public class UserController {
@@ -37,9 +38,13 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	MyProperties properties;
+	
 	@GetMapping("/users")
 	public List<User> getAllUsers(){
 		List<User> users=userRepository.findAll();
+		System.out.println("Value from my-properties is:-"+properties.getValue());
 		/*
 		 * MappingJacksonValue mapping=new MappingJacksonValue(users);
 		 * SimpleBeanPropertyFilter
