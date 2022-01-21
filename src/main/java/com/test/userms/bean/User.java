@@ -36,6 +36,8 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Post> posts;
 	
+	private Integer port;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -66,6 +68,11 @@ public class User {
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
 	}
-	
+	public Integer getPort() {
+		return port;
+	}
+	public void setPort(Integer port) {
+		this.port = port;
+	}
 	
 }

@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -41,9 +42,14 @@ public class UserController {
 	@Autowired
 	MyProperties properties;
 	
+	@Autowired
+	Environment environment;
+	
 	@GetMapping("/users")
 	public List<User> getAllUsers(){
 		List<User> users=userRepository.findAll();
+		int port=Integer.parseInt(environment.getProperty("local.server.port"));
+		users.forEach(u->u.setPort(port));
 		System.out.println("Value from my-properties is:-"+properties.getValue());
 		/*
 		 * MappingJacksonValue mapping=new MappingJacksonValue(users);
@@ -63,6 +69,7 @@ public class UserController {
 			List<Link> links=new ArrayList<>();
 			Link link=WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getAllUsers()).withRel("all-users");
 			links.add(link);
+			ifUser.get().setPort(Integer.parseInt(environment.getProperty("local.server.port")));
 			EntityModel<User> model=EntityModel.of(ifUser.get(), links);
 			return model;
 		}else {
