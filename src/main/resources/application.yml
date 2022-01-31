@@ -15,10 +15,13 @@ spring:
     time-zone: IST
   config:
     import:
-    - optional:configserver:http://localhost:8888
+    - 'configserver:'
   cloud:
     config:
       profile: qa
+      discovery:
+        enabled: true
+        service-id: config-server
 management:
   endpoints:
     web:
